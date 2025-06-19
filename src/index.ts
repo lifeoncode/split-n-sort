@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 const limiter = rateLimit({ windowMs: 1 * 60 * 1000, limit: 60 });
 app.use(limiter);
-app.use("/splitnsort/api", router);
+app.use("/api", router);
 
 app.use(() => {
   throw new NotFoundError("Route not found");
