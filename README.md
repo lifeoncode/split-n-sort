@@ -52,7 +52,7 @@ Start the Server
 npm run dev
 ```
 
-Server will run on either http://localhost:4000 or http://localhost:8000 by default.
+Server will run on http://localhost:4000
 
 ### 🧪 Environment Variables
 

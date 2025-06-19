@@ -17,14 +17,13 @@ import logger from "../middleware/logger";
 export const wordController = async (req: Request, res: Response): Promise<void> => {
   const { data } = req.body;
   if (!data || !data.trim()) throw new BadRequestError("Data is required");
-  if (isTooLong(data)) throw new UnprocessableEntityError("Data must not be longer than 52 characters");
-  if (!isOnlyAlphabetic(data))
-    throw new UnprocessableEntityError("Data must be a single word without non-alphabetic characters.");
+  // if (isTooLong(data)) throw new UnprocessableEntityError("Data must not be longer than 52 characters");
+  // if (!isOnlyAlphabetic(data))
+  //   throw new UnprocessableEntityError("Data must be a single word without non-alphabetic characters.");
 
   const wordArr: string[] = data.trim().split("");
   const sortedWordArr: string[] = wordArr.sort();
-  const word: string = sortedWordArr.join("");
 
-  res.status(200).json({ word });
-  logger.info(`word processed: ${word}`);
+  res.status(200).json({ word: sortedWordArr });
+  logger.info(`processed: ${data.trim()} -> ${sortedWordArr}`);
 };
