@@ -84,13 +84,13 @@ All tests are automatically run on every push or pull request to the main branch
 There's only 2 endpoints.
 
 ```
-GET /splitnsort/api/status
+GET https://split-n-sort.onrender.com/api/status
 ```
 
 Checks application status
 
 ```
-POST /splitnsort/api/word
+POST https://split-n-sort.onrender.com/api/word
 ```
 
 Performs split and sorting on a given word
