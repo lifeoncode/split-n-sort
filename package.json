@@ -1,0 +1,20 @@
+{
+  "name": "split-n-sort",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lifeoncode/split-n-sort.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lifeoncode/split-n-sort/issues"
+  },
+  "homepage": "https://github.com/lifeoncode/split-n-sort#readme",
+  "description": ""
+}
