@@ -1,5 +1,3 @@
-const ENVIRONMENT = process.env.NODE_ENV;
-
 /**
  * @func isDev
  *
@@ -9,7 +7,7 @@ const ENVIRONMENT = process.env.NODE_ENV;
  * @returns {Boolean}
  */
 export const isDev = (): boolean => {
-  return ENVIRONMENT === "development";
+  return process.env.NODE_ENV === "development";
 };
 
 /**
@@ -21,7 +19,7 @@ export const isDev = (): boolean => {
  * @returns {Boolean}
  */
 export const isProd = (): boolean => {
-  return ENVIRONMENT === "production";
+  return process.env.NODE_ENV === "production";
 };
 
 /**
@@ -36,4 +34,18 @@ export const isProd = (): boolean => {
  */
 export const isOnlyAlphabetic = (data: string): boolean => {
   return /^[a-zA-Z]+$/.test(data.trim());
+};
+
+/**
+ * @func isTooLong
+ *
+ * @description
+ * Checks if data string is longer than necessary.
+ *
+ * @param {String} data - Data to check
+ *
+ * @returns {Boolean}
+ */
+export const isTooLong = (data: string): boolean => {
+  return data.trim().length > 52;
 };

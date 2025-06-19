@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { BadRequestError, UnprocessableEntityError } from "../middleware/errors";
-import { isOnlyAlphabetic } from "../util/helper";
+import { isOnlyAlphabetic, isTooLong } from "../util/helper";
 import logger from "../middleware/logger";
 
 /**
@@ -17,6 +17,7 @@ import logger from "../middleware/logger";
 export const wordController = async (req: Request, res: Response): Promise<void> => {
   const { data } = req.body;
   if (!data || !data.trim()) throw new BadRequestError("Data is required");
+  if (isTooLong(data)) throw new UnprocessableEntityError("Data must not be longer than 52 characters");
   if (!isOnlyAlphabetic(data))
     throw new UnprocessableEntityError("Data must be a single word without non-alphabetic characters.");
 
