@@ -1,17 +1,29 @@
 import { Request, Response } from "express";
+import { BadRequestError, UnprocessableEntityError } from "../middleware/errors";
+import { isOnlyAlphabetic } from "../util/helper";
+import logger from "../middleware/logger";
 
+/**
+ * @controller wordController
+ *
+ * @description
+ * Performs operations on request data
+ *
+ * @param {Request} req - Express Request obj
+ * @param {Response} req - Express Response obj
+ *
+ * @returns {void}
+ */
 export const wordController = async (req: Request, res: Response): Promise<void> => {
-  try {
-    const { data } = req.body;
-    if (!data) throw new Error("data required");
+  const { data } = req.body;
+  if (!data || !data.trim()) throw new BadRequestError("Data is required");
+  if (!isOnlyAlphabetic(data))
+    throw new UnprocessableEntityError("Data must be a single word without non-alphabetic characters.");
 
-    const wordArr: string[] = data.split("");
-    const sortedWordArr: string[] = wordArr.sort();
-    const word = sortedWordArr.join("");
+  const wordArr: string[] = data.trim().split("");
+  const sortedWordArr: string[] = wordArr.sort();
+  const word: string = sortedWordArr.join("");
 
-    res.status(200).json({ word });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json(error);
-  }
+  res.status(200).json({ word });
+  logger.info(`word processed: ${word}`);
 };

@@ -1,5 +1,18 @@
 import { Request, Response } from "express";
+import logger from "../middleware/logger";
+import { ServiceUnavailableError } from "../middleware/errors";
 
+/**
+ * @controller statusController
+ *
+ * @description
+ * Checks if application is operational
+ *
+ * @param {Request} req - Express Request obj
+ * @param {Response} req - Express Response obj
+ *
+ * @returns {void}
+ */
 export const statusController = async (req: Request, res: Response): Promise<void> => {
   try {
     res.status(200).json({
@@ -7,8 +20,9 @@ export const statusController = async (req: Request, res: Response): Promise<voi
       timestamp: new Date().toISOString(),
       message: "system online",
     });
+    logger.info("status check");
   } catch (error) {
-    console.log(error);
-    res.status(500).json(error);
+    logger.error(error);
+    throw new ServiceUnavailableError();
   }
 };
