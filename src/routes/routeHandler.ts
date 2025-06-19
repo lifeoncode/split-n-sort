@@ -1,28 +1,10 @@
 import { Router } from "express";
+import { wordController } from "../controllers/wordController";
+import { statusController } from "../controllers/statusController";
 
 const router = Router();
 
-router.get("/status", async (req, res) => {
-  try {
-    res.send({ msg: "it works" });
-  } catch (error) {
-    console.log(error);
-    res.send(error);
-  }
-});
-
-router.post("/word", async (req, res) => {
-  try {
-    const { data } = req.body;
-    if (!data.trim()) throw new Error("data required");
-
-    const wordArr: string[] = data.split("");
-    const sortedWordArr: string[] = wordArr.sort();
-    res.send({ word: sortedWordArr.join("") });
-  } catch (error) {
-    console.log(error);
-    res.send(error);
-  }
-});
+router.get("/status", statusController);
+router.post("/word", wordController);
 
 export default router;
